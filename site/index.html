@@ -303,20 +303,6 @@ footer a:hover{color:var(--mint)}
 .legal{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--fg-3)}
 
 
-/* pains */
-.pains{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.pain{border-radius:16px;border:1px solid rgba(245,184,75,.22);background:linear-gradient(180deg,rgba(245,184,75,.07),rgba(245,184,75,.02));padding:20px 18px;display:grid;gap:10px;align-content:start;min-width:0}
-.pain span{font:600 12px/1 var(--f-m);color:var(--amber)}
-.pain p{font:600 16px/1.35 var(--f-d);color:var(--fg)}
-.fix{margin-top:16px;border-radius:20px;border:1px solid rgba(62,230,180,.28);background:linear-gradient(90deg,rgba(62,230,180,.10),rgba(30,111,217,.08));padding:24px 26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
-.fix-h{display:flex;gap:14px;align-items:center}
-.fix-h .mk{width:40px;height:40px;flex:none}
-.fix-h b{display:block;font:700 20px/1.25 var(--f-d)}
-.fix-h span{font-size:14px;color:var(--fg-2)}
-.fix ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:flex-end}
-.fix li{display:flex;gap:8px;align-items:center;font-size:15px}
-.fix li .ico{width:18px;height:18px;color:var(--mint)}
-@media (max-width:980px){ .pains{grid-template-columns:repeat(2,1fr)} .pain:last-child{grid-column:1/-1} .fix{grid-template-columns:1fr} .fix ul{justify-content:flex-start} }
 /* about */
 .about{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
 .about .copy{display:grid;gap:18px;color:var(--fg-2);font-size:17px;max-width:60ch}
@@ -341,7 +327,6 @@ footer a:hover{color:var(--mint)}
 
 @media (max-width:1100px){ .f1{left:-14px} .f2{right:-14px} }
 @media (max-width:980px){
-  nav{display:none}
   .duo,.qa,.faqw,.final{grid-template-columns:1fr}
   .plus{top:50%}
   .bento{grid-template-columns:1fr 1fr}
@@ -432,6 +417,39 @@ footer a:hover{color:var(--mint)}
 @media (max-width:960px){.ichs{grid-template-columns:1fr 1fr}.pipe{grid-template-columns:1fr}.pipe::before{left:17px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,#1E6FD9,#7FE3F0,#3EE6B4)}.pipe::after{display:none}.pipe li{grid-template-columns:36px 1fr;column-gap:14px}.pipe li .pn{grid-row:span 2;margin:0}}
 @media (max-width:560px){.ichs{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pipe::after{animation:none;display:none}}
+
+/* menu */
+.dnav a{position:relative;padding:6px 0}
+.dnav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:linear-gradient(90deg,#1E6FD9,#3EE6B4);transform:scaleX(0);transition:transform .25s}
+.dnav a:hover::after,.dnav a.on::after{transform:scaleX(1)}
+.dnav a.on{color:var(--fg)}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--fg);transition:transform .25s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:var(--hh,72px);bottom:0;z-index:49;background:rgba(4,11,22,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow-y:auto;opacity:0;transition:opacity .25s}
+.mnav.open{opacity:1}
+.mnav[hidden]{display:none}
+.mnav-in{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+.mnav ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mnav li{opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;transition-delay:calc(var(--i)*35ms)}
+.mnav.open li{opacity:1;transform:none}
+.mnav li a{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(90deg,rgba(15,42,71,.6),rgba(255,255,255,.02));color:var(--fg);text-decoration:none}
+.mnav li a:active,.mnav li a:hover{border-color:rgba(127,227,240,.5)}
+.mnav .mn{font:600 12px/1 var(--f-m);color:var(--ice);width:28px}
+.mnav li a>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:3px}
+.mnav b{font-size:17px}
+.mnav small{font-size:13px;color:var(--fg-3)}
+.mnav li .ico{width:18px;height:18px;color:var(--fg-3)}
+.mnav-ct{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.mnav-ct a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:14px;font-weight:600;color:#04101f;background:linear-gradient(90deg,#61C0E9,#3EE6B4);text-decoration:none}
+.mnav-ct a+a{color:var(--fg);background:rgba(255,255,255,.06);border:1px solid var(--line-2)}
+.mnav-ct .ico{width:18px;height:18px}
+body.menu-open{overflow:hidden}
+@media (max-width:1100px){.dnav{display:none}.burger{display:flex}}
+@media (max-width:420px){.bar-cta .btn-p{display:none}}
+@media (min-width:1101px){.mnav{display:none!important}}
 </style>
 
 
@@ -442,19 +460,20 @@ footer a:hover{color:var(--mint)}
   <div class="wrap bar">
     <a href="#top" aria-label="APEX Finance home"><svg class="logo" role="img" aria-label="APEX Finance" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 573.0 186.0"><defs><linearGradient id="agh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1E6FD9"/><stop offset="1" stop-color="#7FE3F0"/></linearGradient></defs>
 <g transform="translate(2.19,5.75) scale(1.78)"><path d="M50 8 L90 90 H67 L50 36 L33 90 H10 Z" fill="url(#agh)"/><path d="M18 70 L38 58 L52 64 L80 40" stroke="#3EE6B4" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="82" cy="38" r="6.5" fill="#3EE6B4"/></g><path d="M213.63 124.19V95.8H239.83Q247.43 95.8 252.93 92.8Q258.43 89.8 261.43 84.3Q264.43 78.8 264.43 71.6Q264.43 64.0 261.43 58.5Q258.43 53.0 252.93 50.09Q247.43 47.19 239.83 47.19H213.63V18.79H238.23Q256.83 18.79 270.13 24.99Q283.43 31.19 290.53 42.59Q297.63 54.0 297.63 70.0V73.19Q297.63 88.8 290.53 100.3Q283.43 111.8 270.13 118.0Q256.83 124.19 238.23 124.19ZM184.83 166.0V18.79H217.63V166.0Z M314.23 166.0V20.0H346.23V166.0ZM342.23 166.0V138.8H406.03V166.0ZM342.23 105.4V78.19H401.43V105.4ZM342.23 47.19V20.0H404.63V47.19Z M414.43 166.0 464.23 88.19 464.63 91.6 418.63 20.0H454.63L483.03 65.6H487.63L515.63 20.0H550.63L504.43 92.0L503.83 88.8L555.23 166.0H519.03L485.83 114.4H481.03L449.43 166.0Z" fill="#FFFFFF"/></svg></a>
-    <nav aria-label="Main"><ul>
-      <li><a href="#clients">Clients</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#values">Values</a></li>
-      <li><a href="#platform">What you get</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#intake">Intake</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul></nav>
-    <div class="bar-cta"><a class="btn btn-p" href="#contact">Contact us</a></div>
+    <nav class="dnav" aria-label="Main"><ul><li><a href="#about">About</a></li><li><a href="#clients">Clients</a></li><li><a href="#services">Services</a></li><li><a href="#intake">Intake</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    <div class="bar-cta"><a class="btn btn-p" href="#contact">Contact us</a><button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button></div>
   </div>
 </header>
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mnav-in">
+    <ul><li style="--i:0"><a href="#about"><span class="mn">01</span><span><b>About APEX</b><small>Who we are</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:1"><a href="#values"><span class="mn">02</span><span><b>Mission and values</b><small>What we stand for</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:2"><a href="#clients"><span class="mn">03</span><span><b>Clients</b><small>270+ companies</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:3"><a href="#platform"><span class="mn">04</span><span><b>What you get</b><small>Reports, deadlines, VAT control</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:4"><a href="#services"><span class="mn">05</span><span><b>Services</b><small>Audit, accounting, tax, advisory</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:5"><a href="#intake"><span class="mn">06</span><span><b>Document intake</b><small>Email, folder, ERP, WhatsApp</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:6"><a href="#roadmap"><span class="mn">07</span><span><b>Roadmap</b><small>Where we are going</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:7"><a href="#faq"><span class="mn">08</span><span><b>FAQ</b><small>Good questions</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li><li style="--i:8"><a href="#contact"><span class="mn">09</span><span><b>Contact</b><small>Email, phone, office</small></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a></li></ul>
+    <div class="mnav-ct">
+      <a href="mailto:info@apexfinancegroup.io"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email us</a>
+      <a href="tel:+9611202132"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call us</a>
+    </div>
+  </div>
+</div>
+
 
 <main id="top">
 <div class="hero">
@@ -535,28 +554,7 @@ footer a:hover{color:var(--mint)}
 
 
 <section id="clients" style="padding-top:40px;padding-bottom:40px"><div class="wrap"><div class="sh c"><span class="tag">Our clients</span><h2>Trusted by <span class="grad">more than 270 clients.</span></h2><p>Since 2012, more than 270 companies across Lebanon and the region have relied on APEX for their accounting, tax and audit. A few of them:</p></div><ul class="cgrid" aria-label="Some of our clients"><li><img src="/clients/maliks.webp" alt="Maliks" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/abed_tahan.webp" alt="Abed Tahan" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/afp.webp" alt="AFP" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/mount_lebanon_hospital.webp" alt="Mount Lebanon Hospital" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/hopital_serhal.webp" alt="Hôpital Serhal" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/united_petroleum.webp" alt="United Petroleum" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/philip_morris_international.webp" alt="Philip Morris International" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/stop_and_shop.webp" alt="Stop &amp; Shop" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/data_quest.webp" alt="Data Quest" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/lgu.webp" alt="Lebanese German University" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/deutsche_schule_jounieh.webp" alt="Deutsche Schule Jounieh" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/mikesport.webp" alt="MikeSport" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/global_foods.webp" alt="Global Foods" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/general.webp" alt="General Paints" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/pharmamed.webp" alt="Pharmamed" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/ctserv.webp" alt="CTServ" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/maroun_chedid.webp" alt="Maroun Chedid" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/depeche_mode.webp" alt="Depeche Mode" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/maria_pino.webp" alt="Maria Pino" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/eldorado.webp" alt="Eldorado" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/doculand.webp" alt="Doculand" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/colibri_hotel.webp" alt="Colibri Hotel" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/step_ahead.webp" alt="Step Ahead" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/sage_and_savvy.webp" alt="Sage and Savvy" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/the_backyard.webp" alt="The Backyard" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/le_43.webp" alt="Le 43" width="180" height="75" loading="lazy" decoding="async"></li><li><img src="/clients/artists_and_more.webp" alt="Artists &amp; More" width="180" height="75" loading="lazy" decoding="async"></li></ul><ul class="sect" aria-label="Sectors we serve"><li>Hospitals and clinics</li><li>Retail and supermarkets</li><li>Real estate and contracting</li><li>Manufacturing</li><li>Trading and distribution</li><li>Schools and universities</li><li>Hotels and restaurants</li><li>Ports and logistics</li><li>Petroleum</li></ul><p class="cnote">Clients in Lebanon, Iraq, Armenia, Cyprus and the UAE.</p></div></section>
-<section id="why" style="padding-top:60px">
-  <div class="wrap">
-    <div class="sh c"><span class="tag">Sound familiar?</span><h2>Most clients come to us <span class="grad">after one of these.</span></h2></div>
-    <div class="pains">
-      <div class="pain"><span>01</span><p>Mistakes from a previous accountant</p></div>
-      <div class="pain"><span>02</span><p>Tax fines and late filings</p></div>
-      <div class="pain"><span>03</span><p>Messy books before an audit</p></div>
-      <div class="pain"><span>04</span><p>Numbers the owner cannot read</p></div>
-      <div class="pain"><span>05</span><p>A finance team that cannot handle the load</p></div>
-    </div>
-    <div class="fix">
-      <div class="fix-h"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="agfx" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1E6FD9"/><stop offset="1" stop-color="#7FE3F0"/></linearGradient></defs><path d="M50 8 L90 90 H67 L50 36 L33 90 H10 Z" fill="url(#agfx)"/><path d="M18 70 L38 58 L52 64 L80 40" stroke="#3EE6B4" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="82" cy="38" r="6.5" fill="#3EE6B4"/></svg><div><b>APEX takes it off your plate.</b><span>This is what clients thank us for most.</span></div></div>
-      <ul>
-        <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>Every deadline met</li>
-        <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>Errors caught before they cost you</li>
-        <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>No more fines</li>
-        <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>Numbers explained in plain words</li>
-        <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>A partner you can always reach</li>
-      </ul>
-    </div>
-  </div>
-</section>
+
 <section id="about">
   <div class="wrap about">
     <div>
@@ -707,6 +705,17 @@ footer a:hover{color:var(--mint)}
     tabs.forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');document.getElementById(x.getAttribute('aria-controls')).hidden=true;});
     t.classList.add('on');t.setAttribute('aria-selected','true');document.getElementById(t.getAttribute('aria-controls')).hidden=false;
   });});
+  var bt=document.querySelector('.burger'),mn=document.getElementById('mnav'),hd=document.querySelector('header');
+  function setH(){document.documentElement.style.setProperty('--hh',hd.getBoundingClientRect().bottom+'px');}
+  function openM(o){bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('menu-open',o);
+    if(o){setH();mn.hidden=false;requestAnimationFrame(function(){mn.classList.add('open');});}else{mn.classList.remove('open');setTimeout(function(){if(!mn.classList.contains('open'))mn.hidden=true;},250);}}
+  bt.addEventListener('click',function(){openM(bt.getAttribute('aria-expanded')!=='true');});
+  mn.addEventListener('click',function(e){if(e.target.closest('a'))openM(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mn.hidden)openM(false);});
+  window.addEventListener('resize',function(){if(window.innerWidth>1100&&!mn.hidden)openM(false);});
+  var links=[].slice.call(document.querySelectorAll('.dnav a'));
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+x.target.id);});}});},{rootMargin:'-45% 0px -50% 0px'});
+    links.forEach(function(l){var t=document.querySelector(l.getAttribute('href'));if(t)io.observe(t);});}
   var y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
 })();
 </script>
