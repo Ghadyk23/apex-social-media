@@ -57,8 +57,12 @@ p{margin:0}
 .announce .wrap{display:flex;justify-content:center;gap:10px;padding-block:10px;flex-wrap:wrap;text-align:center}
 .announce b{color:var(--fg);font-weight:600}
 .announce a{color:var(--mint);font-weight:600}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(5,15,29,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:transparent;pointer-events:none}
+header .bar{pointer-events:auto;max-width:min(var(--w),calc(100% - 20px))}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px;margin-top:10px;border-radius:20px;border:1px solid transparent;transition:background .35s,border-color .35s,box-shadow .35s,padding .35s,margin .35s}
+header.scrolled .bar{padding-inline:18px;background:rgba(7,17,33,.72);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-color:rgba(127,227,240,.14);box-shadow:0 10px 40px -18px rgba(0,0,0,.8);padding-block:8px;margin-top:10px}
+.hero{padding-top:84px}
+html{scroll-padding-top:96px}
 .logo{height:32px;width:auto;display:block}
 .bar>a:first-child{display:block;padding-block:6px}
 nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0}
@@ -428,10 +432,10 @@ footer a:hover{color:var(--mint)}
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mnav{position:fixed;left:0;right:0;top:var(--hh,72px);bottom:0;z-index:49;background:rgba(4,11,22,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow-y:auto;opacity:0;transition:opacity .25s}
+.mnav{position:fixed;left:0;right:0;top:0;bottom:0;z-index:49;background:rgba(4,11,22,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow-y:auto;opacity:0;transition:opacity .25s}
 .mnav.open{opacity:1}
 .mnav[hidden]{display:none}
-.mnav-in{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+.mnav-in{max-width:640px;margin:0 auto;padding:calc(var(--hh,80px) + 12px) 16px 40px}
 .mnav ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .mnav li{opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;transition-delay:calc(var(--i)*35ms)}
 .mnav.open li{opacity:1;transform:none}
@@ -455,7 +459,7 @@ body.menu-open{overflow:hidden}
 
 </head>
 <body>
-<div class="announce"><div class="wrap"><span><b>Year-end is coming.</b> Plan your 2026 audit and closing early.</span><a href="#contact">Contact us →</a></div></div>
+
 <header>
   <div class="wrap bar">
     <a href="#top" aria-label="APEX Finance home"><svg class="logo" role="img" aria-label="APEX Finance" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 573.0 186.0"><defs><linearGradient id="agh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1E6FD9"/><stop offset="1" stop-color="#7FE3F0"/></linearGradient></defs>
@@ -705,9 +709,10 @@ body.menu-open{overflow:hidden}
     tabs.forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');document.getElementById(x.getAttribute('aria-controls')).hidden=true;});
     t.classList.add('on');t.setAttribute('aria-selected','true');document.getElementById(t.getAttribute('aria-controls')).hidden=false;
   });});
+  var hdr=document.querySelector('header');function onS(){hdr.classList.toggle('scrolled',window.scrollY>12||document.body.classList.contains('menu-open'));}window.addEventListener('scroll',onS,{passive:true});onS();
   var bt=document.querySelector('.burger'),mn=document.getElementById('mnav'),hd=document.querySelector('header');
   function setH(){document.documentElement.style.setProperty('--hh',hd.getBoundingClientRect().bottom+'px');}
-  function openM(o){bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('menu-open',o);
+  function openM(o){bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('menu-open',o);onS();
     if(o){setH();mn.hidden=false;requestAnimationFrame(function(){mn.classList.add('open');});}else{mn.classList.remove('open');setTimeout(function(){if(!mn.classList.contains('open'))mn.hidden=true;},250);}}
   bt.addEventListener('click',function(){openM(bt.getAttribute('aria-expanded')!=='true');});
   mn.addEventListener('click',function(e){if(e.target.closest('a'))openM(false);});
