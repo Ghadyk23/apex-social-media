@@ -151,11 +151,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 #chart .years text{fill:#8FA6C0;font:500 13px "JetBrains Mono",monospace;text-anchor:middle}
 #chart .ms{opacity:0}
 #chart .ms circle{fill:#06182B;stroke:#3EE6B4;stroke-width:3}
-#chart .ms text{fill:#8FA6C0;font:500 15px Inter,system-ui,sans-serif}
-#chart .ms .v{fill:#EEF4FB;font:700 30px Sora,system-ui,sans-serif}
+#chart .ms text{fill:#A9BCD2;font:500 17px Inter,system-ui,sans-serif}
+#chart .ms .v{fill:#EEF4FB;font:700 32px Sora,system-ui,sans-serif}
 #chart #head{fill:#3EE6B4;filter:drop-shadow(0 0 10px #3EE6B4)}
 .intro-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;max-width:1180px;margin:0 auto;opacity:0;pointer-events:none}
-.intro-end h2{font-size:clamp(34px,5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.04;margin-top:12px;max-width:640px}
+.intro-end h2{font-size:clamp(34px,5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.06;margin-top:12px;max-width:820px}
 .intro-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center}
 .big-logo{width:min(620px,84vw);height:auto;color:var(--paper);overflow:visible}
 .intro-tag{font-family:var(--mono);font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--mint)}
@@ -171,16 +171,26 @@ nav{opacity:0;transition:opacity .4s, border-color .3s}
 nav.show{opacity:1}
 @media (max-width:820px){
  #intro{height:100svh}
- #chart{inset:18% 0 14%;width:100%;height:68%}
- #chart .years text{font-size:30px}
+ #chart{inset:auto 0 9% 0;top:auto;width:100%;height:auto;aspect-ratio:360/290}
+ #chart .years text{font-size:12px}
  #chart .years text:nth-child(even){display:none}
- #chart .ms text{font-size:30px}
- #chart .ms .v{font-size:50px}
- #chart .ms:nth-of-type(5) text{transform:translate(110px,150px)}
- #chart .ms:nth-of-type(4) text{transform:translate(-40px,-20px)}
- #chart .grid line{stroke-width:2}
- #growth{stroke-width:9}
+ #chart .ms text{display:none}
+ #chart .grid line{stroke-width:1}
+ #growth{stroke-width:3.5}
+ .ms-cap{position:absolute;left:0;right:0;top:20%;z-index:2;opacity:0;pointer-events:none}
+ .ms-cap b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(56px,17vw,112px);letter-spacing:-.03em;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
+ .ms-cap span{display:block;margin-top:10px;font-size:clamp(18px,2.8vw,24px);font-weight:500;color:#A9BCD2}
+ .ms-cap i{display:block;font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--mint);margin-bottom:14px}
+ .intro-end h2{font-size:clamp(26px,7.6vw,52px)}
+ .st{padding-left:60px;min-height:40px}.st .dot{position:absolute;left:0;top:0}.st h3{margin-top:6px}
+ .steps{gap:28px}
+ .kpis{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.kpi{padding:10px 8px}.kpi b{font-size:clamp(13px,3.9vw,17px)}.kpi span{font-size:10px}
 }
+@media (min-width:821px){.ms-cap{display:none}}
+@media (max-width:820px){section{padding-block:64px}#sectors{padding-block:28px}}
+@media (max-width:380px){.kpis{grid-template-columns:1fr}.kpi{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.kpi b{font-size:16px}}
+footer a{display:inline-block;padding:8px 2px}
+nav ul a{display:inline-block;padding:8px 2px}
 
 .cdet a{display:block;text-decoration:none}.cdet a:hover{border-color:var(--mint);color:var(--mint)}
 </style>
@@ -199,10 +209,10 @@ nav.show{opacity:1}
     <g class="years"><text x="60" y="592">2012</text><text x="214" y="592">2014</text><text x="369" y="592">2016</text><text x="523" y="592">2018</text><text x="677" y="592">2020</text><text x="831" y="592">2022</text><text x="986" y="592">2024</text><text x="1140" y="592">2026</text></g>
     <path id="area" clip-path="url(#reveal)" d="M60 540 L260 470 L400 505 L560 360 L700 405 L860 230 L1000 265 L1140 70 L1140 560 L60 560 Z" fill="url(#gArea)"/>
     <path id="growth" d="M60 540 L260 470 L400 505 L560 360 L700 405 L860 230 L1000 265 L1140 70" fill="none" stroke="url(#gLine)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <g class="ms" data-at="0"><circle cx="60" cy="540" r="7"/><text x="84" y="498"><tspan class="v">2012</tspan><tspan x="84" dy="22">Founded in Beirut</tspan></text></g>
-    <g class="ms" data-at="0.42"><circle cx="560" cy="360" r="7"/><text x="580" y="330"><tspan class="v" data-count="270">270+</tspan><tspan x="580" dy="22">Clients served</tspan></text></g>
-    <g class="ms" data-at="0.7"><circle cx="860" cy="230" r="7"/><text x="760" y="170"><tspan class="v" data-count="100">100+</tspan><tspan x="760" dy="22">Audits every year</tspan></text></g>
-    <g class="ms" data-at="0.995"><circle cx="1140" cy="70" r="7"/><text x="1120" y="125" text-anchor="end"><tspan class="v" data-count="50">50+</tspan><tspan x="1120" dy="22">Sectors served</tspan></text></g>
+    <g class="ms" data-at="0" data-label="Founded in Beirut"><circle cx="60" cy="540" r="7"/><text x="60" y="438"><tspan class="v">2012</tspan><tspan x="60" dy="24">Founded in Beirut</tspan></text></g>
+    <g class="ms" data-at="0.42" data-label="Clients served"><circle cx="560" cy="360" r="7"/><text x="500" y="300"><tspan class="v" data-count="270">270+</tspan><tspan x="500" dy="24">Clients served</tspan></text></g>
+    <g class="ms" data-at="0.7" data-label="Audits every year"><circle cx="860" cy="230" r="7"/><text x="760" y="160"><tspan class="v" data-count="100">100+</tspan><tspan x="760" dy="24">Audits every year</tspan></text></g>
+    <g class="ms" data-at="0.995" data-label="Sectors served"><circle cx="1140" cy="70" r="7"/><text x="1070" y="86" text-anchor="end"><tspan class="v" data-count="50">50+</tspan><tspan x="1070" dy="24">Sectors served</tspan></text></g>
     <circle id="head" cx="60" cy="540" r="9"/>
   </svg>
   <div class="intro-in gut" id="introLogo">
@@ -210,6 +220,7 @@ nav.show{opacity:1}
 <g transform="translate(2.195,5.756) scale(1.78049)"><path class="bl-tri" d="M50 8 L90 90 H67 L50 36 L33 90 H10 Z" fill="url(#agBig)"/><path class="bl-chart" id="blChart" d="M18 70 L38 58 L52 64 L80 40" stroke="#3EE6B4" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle class="bl-dot" id="blDot" cx="82" cy="38" r="6.5" fill="#3EE6B4"/></g><path class="bl-word" d="M213.6390243902439 124.19999999999999V95.8H239.8390243902439Q247.4390243902439 95.8 252.9390243902439 92.8Q258.4390243902439 89.8 261.4390243902439 84.3Q264.4390243902439 78.8 264.4390243902439 71.6Q264.4390243902439 64.0 261.4390243902439 58.5Q258.4390243902439 53.0 252.9390243902439 50.099999999999994Q247.4390243902439 47.19999999999999 239.8390243902439 47.19999999999999H213.6390243902439V18.799999999999983H238.2390243902439Q256.83902439024394 18.799999999999983 270.1390243902439 24.999999999999986Q283.4390243902439 31.19999999999999 290.53902439024387 42.599999999999994Q297.6390243902439 54.0 297.6390243902439 70.0V73.19999999999999Q297.6390243902439 88.8 290.53902439024387 100.3Q283.4390243902439 111.8 270.1390243902439 118.0Q256.83902439024394 124.19999999999999 238.2390243902439 124.19999999999999ZM184.8390243902439 166.0V18.799999999999983H217.6390243902439V166.0Z M314.2390243902439 166.0V20.0H346.2390243902439V166.0ZM342.2390243902439 166.0V138.8H406.0390243902439V166.0ZM342.2390243902439 105.4V78.19999999999999H401.43902439024396V105.4ZM342.2390243902439 47.19999999999999V20.0H404.63902439024395V47.19999999999999Z M414.43902439024396 166.0 464.23902439024397 88.19999999999999 464.63902439024395 91.6 418.63902439024395 20.0H454.63902439024395L483.039024390244 65.6H487.63902439024395L515.639024390244 20.0H550.639024390244L504.43902439024396 92.0L503.83902439024394 88.8L555.2390243902439 166.0H519.039024390244L485.83902439024394 114.4H481.039024390244L449.43902439024396 166.0Z" fill="currentColor"/></svg>
     <div class="intro-tag" id="introTag">Beyond Numbers</div>
   </div>
+  <div class="ms-cap gut" id="msCap" aria-hidden="true"><i>APEX SINCE 2012</i><b id="msVal">2012</b><span id="msLab">Founded in Beirut</span></div>
   <div class="intro-end gut" id="introEnd"><div class="eyebrow">Since 2012</div><h2>Every number, checked.<br>Every deadline, met.</h2></div>
   <div class="intro-cue" aria-hidden="true">SCROLL<i></i></div>
 </section>
@@ -367,6 +378,21 @@ nav.show{opacity:1}
   if (typeof gsap === 'undefined' || reduce) return;
   gsap.registerPlugin(ScrollTrigger);
   /* scroll: the logo's mint line becomes APEX's growth line, 2012 to today, then one closing statement */
+  const phone = matchMedia('(max-width: 820px)').matches;
+  if (phone) {   /* portrait chart for phones: same data, sized so every word is readable */
+    const svg = document.getElementById('chart'); svg.setAttribute('viewBox','0 0 360 290');
+    const X = x => 22 + (x-60)/1080*316, Y = y => 18 + (y-70)/490*232;
+    const P = [[60,540],[260,470],[400,505],[560,360],[700,405],[860,230],[1000,265],[1140,70]].map(([a,b])=>[X(a),Y(b)].map(n=>+n.toFixed(1)));
+    const d = 'M'+P.map(q=>q.join(' ')).join(' L');
+    document.getElementById('growth').setAttribute('d', d);
+    document.getElementById('area').setAttribute('d', d+` L${P[7][0]} ${Y(560)} L${P[0][0]} ${Y(560)} Z`);
+    document.getElementById('revealRect').setAttribute('height', 290);
+    svg.querySelectorAll('.grid line').forEach((l,i)=>{ const yy=[120,240,360,480,560][i]; l.setAttribute('x1',22); l.setAttribute('x2',338); l.setAttribute('y1',Y(yy)); l.setAttribute('y2',Y(yy)); });
+    svg.querySelectorAll('.years text').forEach((t,i)=>{ const xx=60+i*1080/7; t.setAttribute('x', X(xx)); t.setAttribute('y', Y(560)+22); });
+    const pts={'0':P[0],'0.42':P[3],'0.7':P[5],'0.995':P[7]};
+    svg.querySelectorAll('.ms').forEach(m=>{ const c=m.querySelector('circle'), q=pts[m.dataset.at]; c.setAttribute('cx',q[0]); c.setAttribute('cy',q[1]); c.setAttribute('r',5); });
+    const h=document.getElementById('head'); h.setAttribute('r',6); h.setAttribute('cx',P[0][0]); h.setAttribute('cy',P[0][1]);
+  }
   const gp = document.getElementById('growth'), GL = gp.getTotalLength(), head = document.getElementById('head');
   const rr = document.getElementById('revealRect');
   gsap.set(gp, {strokeDasharray:GL, strokeDashoffset:GL});
@@ -378,24 +404,41 @@ nav.show{opacity:1}
     rr.setAttribute('width', pt.x);
     ms.forEach(m => { const on = p >= +m.dataset.at; m.style.opacity = on ? 1 : 0;
       const v = m.querySelector('[data-count]');
-      if (on && v && !shown.has(m)){ shown.add(m); const o={n:0}, to=+v.dataset.count; gsap.to(o,{n:to,duration:.9,ease:'power2.out',onUpdate(){ v.textContent=Math.round(o.n)+'+'; }}); }
+      if (on && !shown.has(m)){ shown.add(m); if (phone) capShow(m);
+        if (v){ const o={n:0}, to=+v.dataset.count; gsap.to(o,{n:to,duration:.9,ease:'power2.out',onUpdate(){ v.textContent=Math.round(o.n)+'+'; if(phone && capCur===m) msVal.textContent=Math.round(o.n)+'+'; }}); } }
       if (!on && shown.has(m)) shown.delete(m); });
   }
+  const msVal=document.getElementById('msVal'), msLab=document.getElementById('msLab'), msCap=document.getElementById('msCap'); let capCur=null;
+  function capShow(m){ capCur=m; const v=m.querySelector('[data-count]');
+    gsap.fromTo([msVal,msLab],{y:14,opacity:0},{y:0,opacity:1,duration:.45,stagger:.06,ease:'power3.out'});
+    msVal.textContent = v ? '0+' : '2012'; msLab.textContent = m.dataset.label; }
   setProgress(0);
   const prog = {p:0};
-  const phone = matchMedia('(max-width: 820px), (pointer: coarse)').matches;
   /* reveal helper: IntersectionObserver works on phones and inside app previews, where scroll events may not reach the page */
   function whenSeen(el, fn, thr){ if(!el) return; const o=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ o.disconnect(); fn(); } }),{threshold:thr||.15}); o.observe(el); }
-  const introTL = gsap.timeline({paused:phone, scrollTrigger: phone ? null : {trigger:'#intro',start:'top top',end:'+=220%',scrub:.6,pin:true}})
+  let introTL;
+  if (!phone) {
+    introTL = gsap.timeline({scrollTrigger:{trigger:'#intro',start:'top top',end:'+=220%',scrub:.6,pin:true}})
     .to('#bigLogo .bl-word, #introTag, .intro-cue',{opacity:0,y:-16,duration:.12},0)
     .to('#bigLogo',{scale:.35,y:-120,opacity:0,duration:.18},.04)
     .to('#chart',{opacity:1,duration:.1},.08)
     .to(prog,{p:1,duration:.62,ease:'none',onUpdate(){ setProgress(prog.p); }},.12)
-    .to('#chart',{opacity:.07,duration:.07},.78)
+    .to('#chart',{opacity:.07,duration:.07},.8)
     .to('#introEnd',{opacity:1,duration:.1},.86)
     .from('#introEnd h2',{y:30,duration:.12},.86);
-  if(phone){ document.querySelectorAll('#chart .ms text tspan:not(.v)').forEach(t=>t.setAttribute('dy','40'));
-    introTL.duration(6.5); let started=false; const go=()=>{ if(started) return; started=true; setTimeout(()=>introTL.play(), 1300); };
+  } else {
+    /* phones: plays by itself (no scroll pinning), in real seconds, each figure held long enough to read */
+    introTL = gsap.timeline({paused:true})
+    .to('#bigLogo .bl-word, #introTag, .intro-cue',{opacity:0,y:-16,duration:.5},0)
+    .to('#bigLogo',{scale:.4,y:-90,opacity:0,duration:.8,ease:'power2.in'},.2)
+    .to('#chart',{opacity:1,duration:.6},.7)
+    .to(msCap,{opacity:1,duration:.4},.8)
+    .to(prog,{p:1,duration:7,ease:'none',onUpdate(){ setProgress(prog.p); }},.9)
+    .to([msCap,'#chart'],{opacity:0,duration:.6},9.6)
+    .to('#chart',{opacity:.06,duration:.1},10.2)
+    .to('#introEnd',{opacity:1,duration:.6},10.2)
+    .from('#introEnd h2',{y:30,duration:.8,ease:'power3.out'},10.2);
+    let started=false; const go=()=>{ if(started) return; started=true; setTimeout(()=>introTL.play(), 900); };
     const ready=()=>whenSeen(document.getElementById('intro'), go, .5);
     if(window.__logoDone) ready(); else { window.__afterLogo=ready; setTimeout(ready, 7000); }
   }
