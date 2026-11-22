@@ -272,12 +272,12 @@ body.menu-open nav{opacity:1}
 
 /* sectors: one smooth CSS-only sliding band (GPU transform, cheap) */
 .smarq{margin-top:22px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.strack{list-style:none;margin:0;padding:4px 0;display:flex;gap:14px;width:max-content;animation:smq 46s linear infinite;will-change:transform}
+.strack{list-style:none;margin:0;padding:4px 0;display:flex;gap:14px;width:max-content;animation:smq 30s linear infinite;will-change:transform}
 .smarq:hover .strack{animation-play-state:paused}
 @keyframes smq{to{transform:translate3d(-50%,0,0)}}
 .strack li{flex:none;display:inline-flex;align-items:center;gap:12px;padding:14px 22px 14px 16px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012));font-family:var(--display);font-weight:600;font-size:17px;color:#e6eef7;white-space:nowrap}
 .strack svg{width:30px;height:30px;padding:6px;border-radius:50%;background:rgba(62,230,180,.12);fill:none;stroke:#3EE6B4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;box-sizing:border-box}
-@media (max-width:820px){.strack li{font-size:15px;padding:11px 18px 11px 12px}.strack{animation-duration:38s}}
+@media (max-width:820px){.strack li{font-size:15px;padding:11px 18px 11px 12px}.strack{animation-duration:24s}}
 @media (prefers-reduced-motion:reduce){.strack{animation-duration:90s}}
 </style>
 </head>
