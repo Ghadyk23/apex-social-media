@@ -260,9 +260,6 @@ body.menu-open nav{opacity:1}
 .rmap .mk .core{fill:#3EE6B4;stroke:#06182B;stroke-width:3}
 .rmap .mk.hq .core{fill:#fff;stroke:#3EE6B4;stroke-width:4}
 .rmap .mk .ping{fill:none;stroke:#3EE6B4;stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;vector-effect:non-scaling-stroke}
-.rmap.lit .mk .ping{animation:rping 2.4s ease-out 1 2.6s}
-.rmap.lit .mk.hq .ping{stroke:#fff;animation:rping 1.8s ease-out 3 .4s}
-@keyframes rping{0%{transform:scale(.8);opacity:.9}100%{transform:scale(3.8);opacity:0}}
 .rmap .ln{font-family:var(--display);font-weight:700;font-size:30px;fill:#fff;paint-order:stroke;stroke:#071a30;stroke-width:8px;stroke-linejoin:round}
 .rmap .lc{font-family:var(--mono);font-size:17px;letter-spacing:.14em;fill:#b7c7d8;paint-order:stroke;stroke:#071a30;stroke-width:7px;stroke-linejoin:round}
 .rmap .lb-lb .lc{fill:#3EE6B4}
@@ -396,9 +393,9 @@ body.menu-open nav{opacity:1}
   <h2 class="sec-title rv" id="reachT">From Beirut, across the region.</h2>
   <p class="cl-sub rv">Clients in Lebanon, Cyprus, Armenia, Iraq and the UAE, served from our office in Beirut.</p>
   <div class="rmapbox" id="rmapbox"><svg class="rmap" viewBox="0 0 1000 808" role="img" aria-label="Map: APEX is based in Beirut, Lebanon, with clients in Cyprus, Armenia, Iraq and the UAE">
-<defs><clipPath id="rclip"><circle id="rrev" cx="220.3" cy="347.8" r="0"/></clipPath><linearGradient id="arcg" x1="0" x2="1"><stop offset="0" stop-color="#3EE6B4"/><stop offset="1" stop-color="#61C0E9"/></linearGradient></defs>
-<g clip-path="url(#rclip)"><image href="map/region-dots.png" x="0" y="0" width="1000" height="808"/></g>
-<g class="arcs"><path class="arc" id="arc-cy" d="M220.3 347.8 Q202.5 296.8 148.5 296.1"/><path class="arc" id="arc-am" d="M220.3 347.8 Q284.1 113.8 525.8 93.7"/><path class="arc" id="arc-iq" d="M220.3 347.8 Q378.7 254.4 520.7 371.3"/><path class="arc" id="arc-ae" d="M220.3 347.8 Q625.0 390.5 890.5 698.9"/></g><g class="marks"><g class="mk hq" data-k="lb" transform="translate(220.3 347.8)"><circle class="ping" r="10"/><circle class="core" r="9"/></g><g class="mk" data-k="cy" transform="translate(148.5 296.1)"><circle class="ping" r="10"/><circle class="core" r="7"/></g><g class="mk" data-k="am" transform="translate(525.8 93.7)"><circle class="ping" r="10"/><circle class="core" r="7"/></g><g class="mk" data-k="iq" transform="translate(520.7 371.3)"><circle class="ping" r="10"/><circle class="core" r="7"/></g><g class="mk" data-k="ae" transform="translate(890.5 698.9)"><circle class="ping" r="10"/><circle class="core" r="7"/></g></g><g class="labels"><g class="lb lb-lb" transform="translate(238.3 397.8)"><text text-anchor="start" class="ln">Lebanon</text><text text-anchor="start" y="26" class="lc">HQ · BEIRUT</text></g><g class="lb lb-cy" transform="translate(148.5 266.1)"><text text-anchor="middle" class="ln">Cyprus</text><text text-anchor="middle" y="26" class="lc">NICOSIA</text></g><g class="lb lb-am" transform="translate(547.8 85.7)"><text text-anchor="start" class="ln">Armenia</text><text text-anchor="start" y="26" class="lc">YEREVAN</text></g><g class="lb lb-iq" transform="translate(544.7 405.3)"><text text-anchor="start" class="ln">Iraq</text><text text-anchor="start" y="26" class="lc">BAGHDAD</text></g><g class="lb lb-ae" transform="translate(866.5 676.9)"><text text-anchor="end" class="ln">UAE</text><text text-anchor="end" y="26" class="lc">DUBAI</text></g></g></svg></div>
+<defs><linearGradient id="arcg" x1="0" x2="1"><stop offset="0" stop-color="#3EE6B4"/><stop offset="1" stop-color="#61C0E9"/></linearGradient></defs>
+<g><image href="map/region-dots.png" x="0" y="0" width="1000" height="808"/></g>
+<g class="arcs"><path class="arc" id="arc-cy" d="M220.3 347.8 Q202.5 296.8 148.5 296.1"/><path class="arc" id="arc-am" d="M220.3 347.8 Q284.1 113.8 525.8 93.7"/><path class="arc" id="arc-iq" d="M220.3 347.8 Q378.7 254.4 520.7 371.3"/><path class="arc" id="arc-ae" d="M220.3 347.8 Q625.0 390.5 890.5 698.9"/></g><g class="marks"><g class="mk hq" data-k="lb" transform="translate(220.3 347.8)"><circle class="core" r="9"/></g><g class="mk" data-k="cy" transform="translate(148.5 296.1)"><circle class="core" r="7"/></g><g class="mk" data-k="am" transform="translate(525.8 93.7)"><circle class="core" r="7"/></g><g class="mk" data-k="iq" transform="translate(520.7 371.3)"><circle class="core" r="7"/></g><g class="mk" data-k="ae" transform="translate(890.5 698.9)"><circle class="core" r="7"/></g></g><g class="labels"><g class="lb lb-lb" transform="translate(238.3 397.8)"><text text-anchor="start" class="ln">Lebanon</text><text text-anchor="start" y="26" class="lc">HQ · BEIRUT</text></g><g class="lb lb-cy" transform="translate(148.5 266.1)"><text text-anchor="middle" class="ln">Cyprus</text><text text-anchor="middle" y="26" class="lc">NICOSIA</text></g><g class="lb lb-am" transform="translate(547.8 85.7)"><text text-anchor="start" class="ln">Armenia</text><text text-anchor="start" y="26" class="lc">YEREVAN</text></g><g class="lb lb-iq" transform="translate(544.7 405.3)"><text text-anchor="start" class="ln">Iraq</text><text text-anchor="start" y="26" class="lc">BAGHDAD</text></g><g class="lb lb-ae" transform="translate(866.5 676.9)"><text text-anchor="end" class="ln">UAE</text><text text-anchor="end" y="26" class="lc">DUBAI</text></g></g></svg></div>
   <div class="secth"><span>Sectors we serve</span></div>
   <ul class="schips" id="schips"><li>Hospitals and clinics</li><li>Retail and supermarkets</li><li>Real estate and contracting</li><li>Manufacturing</li><li>Trading and distribution</li><li>Schools and universities</li><li>Hotels and restaurants</li><li>Ports and logistics</li><li>Petroleum</li></ul>
 </div></section>
@@ -489,25 +486,6 @@ body.menu-open nav{opacity:1}
   /* reveal helper: IntersectionObserver works on phones and inside app previews, where scroll events may not reach the page */
   function whenSeen(el, fn, thr){ if(!el) return; const o=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ o.disconnect(); fn(); } }),{threshold:thr||.15}); o.observe(el); }
 
-  /* where we work: map reveals from Beirut, arcs draw out to each country, markers pop, then runners travel the arcs */
-  (function(){
-    const box=document.getElementById('rmapbox'); if(!box) return; const svg=box.querySelector('.rmap');
-    const arcs=[...svg.querySelectorAll('.arc')]; arcs.forEach(a=>{ const L=a.getTotalLength(); a.style.strokeDasharray=L; a.style.strokeDashoffset=L; });
-    gsap.set(svg.querySelectorAll('.mk:not(.hq), .labels .lb:not(.lb-lb)'),{opacity:0,scale:.6,transformOrigin:'center',transformBox:'fill-box'});
-    gsap.set(svg.querySelectorAll('.lb-lb, .mk.hq'),{opacity:0});
-    whenSeen(box,()=>{
-      const tl=gsap.timeline();
-      tl.to('#rrev',{attr:{r:1300},duration:2.2,ease:'power2.out'},0)
-        .to(svg.querySelectorAll('.mk.hq, .lb-lb'),{opacity:1,duration:.6},.2)
-        .add(()=>svg.classList.add('lit'),.6);
-      ['cy','am','iq','ae'].forEach((k,i)=>{
-        const t=.9+i*.35;
-        tl.to('#arc-'+k,{strokeDashoffset:0,duration:1.1,ease:'power2.inOut'},t)
-          .to(svg.querySelectorAll(`.mk[data-k="${k}"], .lb-${k}`),{opacity:1,scale:1,duration:.55,ease:'back.out(2)'},t+.85);
-      });
-      gsap.from('#schips li',{opacity:0,y:18,duration:.6,stagger:.06,ease:'power2.out',delay:1.2});
-    }, phone ? .15 : .3);
-  })();
 
   /* clients logo wall: two rows drifting in opposite directions; scrolling speeds them up; a row pauses under the pointer */
   (function(){
