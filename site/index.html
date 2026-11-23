@@ -74,6 +74,12 @@ nav ul a{text-decoration:none} nav ul a:hover{color:var(--paper)}
 .stages{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin:6px 0 4px;padding-top:6px}
 .stages .trk{position:absolute;left:10%;right:10%;top:13px;height:2px;background:var(--line);border-radius:2px}.stages .trk i{position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,#61C0E9,#3EE6B4);border-radius:2px;transform-origin:left}
 .stg{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}.stg b{width:16px;height:16px;border-radius:50%;background:var(--ink);border:2px solid #3EE6B4;box-shadow:0 0 0 4px rgba(62,230,180,.12)}.stg span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.yr{position:relative;margin:22px 0 6px}.yr span{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.yr b{display:block;font-family:var(--display);font-size:clamp(64px,7vw,96px);font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#fff 0%,#7fe3c9 40%,#fff 50%,#7fe3c9 60%,#fff 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.yr b.shine{transition:background-position 1.6s ease;background-position:0 0}
+.yr .yline{display:block;height:3px;width:120px;margin-top:12px;border-radius:3px;background:linear-gradient(90deg,#61C0E9,#3EE6B4);transform-origin:left}
+.ysub{color:var(--muted);font-size:15px;margin:10px 0 20px}
+.report .kpi b{display:block;font-size:clamp(22px,2.4vw,30px)}.report .kpi span{margin-top:4px}
 .checks{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px}
 .checks li{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:10px;background:rgba(6,24,43,.55)}
 .checks li em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -330,24 +336,15 @@ body.menu-open nav{opacity:1}
       <div class="cta rv"><a class="btn solid" href="#contact">Contact us</a><a class="btn" href="#services">Our services</a></div>
       <div class="trust rv"><span><b>Partner-led</b> on every file</span><span><b>Automated checks</b> every month</span><span><b>One roof</b> for accounting, tax and audit</span></div>
     </div>
-    <div class="report" id="report" aria-label="How a month with APEX runs">
-      <div class="rp-top"><span>Your month with APEX</span><span class="live"><i></i>In progress</span></div>
+    <div class="report" id="report" aria-label="APEX Finance, since 1993">
+      <div class="rp-top"><span>APEX FINANCE</span><span class="live"><i></i>Beirut</span></div>
+      <div class="yr"><span>Since</span><b id="yr">1993</b><i class="yline"></i></div>
+      <p class="ysub">Partner-led audit, tax and accounting, from Beirut.</p>
       <div class="kpis">
-        <div class="kpi"><span>Books</span><b>Current</b></div>
-        <div class="kpi"><span>Controls</span><b>Passed</b></div>
-        <div class="kpi"><span>Review</span><b>Partner</b></div>
+        <div class="kpi"><b data-to="270" data-suf="+">270+</b><span>companies served</span></div>
+        <div class="kpi"><b data-to="5">5</b><span>practices</span></div>
+        <div class="kpi"><b data-to="7">7</b><span>countries</span></div>
       </div>
-      <div class="stages" aria-hidden="true"><div class="trk"><i id="stageBar"></i></div>
-        <div class="stg"><b></b><span>Collect</span></div><div class="stg"><b></b><span>Book</span></div><div class="stg"><b></b><span>Check</span></div><div class="stg"><b></b><span>Review</span></div><div class="stg"><b></b><span>Deliver</span></div>
-      </div>
-      <ul class="checks" id="checks">
-        <li><span>Bank reconciliation</span><em>done</em></li>
-        <li><span>VAT 11% control</span><em>passed</em></li>
-        <li><span>NSSF declaration</span><em>due 15 Nov</em></li>
-        <li><span>Salaries tax</span><em>filed</em></li>
-        <li><span>Monthly P&amp;L</span><em>in review</em></li>
-      </ul>
-      <div class="rp-note">How every month runs, for every client</div>
     </div>
   </div>
 </header>
@@ -597,10 +594,13 @@ body.menu-open nav{opacity:1}
   const tl = gsap.timeline({paused:true}); whenSeen(document.getElementById('hero'), ()=>tl.play(), .2);
   tl.from('#hero .rv', {y:28, opacity:0, duration:.8, stagger:.09, ease:'power3.out'})
     .from('#report', {y:50, opacity:0, duration:1, ease:'expo.out'}, .2);
-  tl.from('#stageBar', {scaleX:0, duration:1.6, ease:'power2.inOut'}, .7)
-    .from('.stg b', {scale:0, duration:.4, stagger:.32, ease:'back.out(2.5)'}, .7)
-    .from('.kpi', {y:12, opacity:0, duration:.5, stagger:.12}, .6);
-  gsap.utils.toArray('#checks li').forEach((li,i) => tl.from(li, {x:20, opacity:0, duration:.4, onComplete(){ if(i<2||i===3) li.classList.add('done'); }}, 1 + i*.18));
+  { const yr=document.getElementById('yr'), o={v:1900};
+    tl.to(o, {v:1993, duration:1.8, ease:'power3.out', onUpdate(){ yr.textContent=Math.round(o.v); }, onComplete(){ yr.classList.add('shine'); }}, .5)
+      .from('#report .yline', {scaleX:0, duration:1, ease:'power2.out'}, 1.6)
+      .from('#report .ysub', {opacity:0, y:10, duration:.6}, 1.2)
+      .from('#report .kpi', {y:16, opacity:0, duration:.6, stagger:.14, ease:'power3.out'}, 1.4);
+    document.querySelectorAll('#report [data-to]').forEach((el,i) => { const to=+el.dataset.to, suf=el.dataset.suf||'', c={v:0};
+      tl.to(c, {v:to, duration:1.3, ease:'power2.out', onUpdate(){ el.textContent=Math.round(c.v)+suf; }}, 1.5 + i*.14); }); }
 
   /* services: the cards fan in one after another, icons draw themselves, points follow; pointer spotlight + gentle tilt */
   const tiles = gsap.utils.toArray('.svc .tile');
