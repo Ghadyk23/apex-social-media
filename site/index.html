@@ -444,6 +444,8 @@ body.menu-open nav{opacity:1}
   else { const o={v:0}; gsap.to(o,{v:2012,duration:1.3,ease:'power2.inOut',onUpdate(){ ldNum.textContent=Math.round(o.v); ldBar.style.width=(o.v/2012*100)+'%'; },onComplete:openPage}); }
   setTimeout(openPage, 4000);
 
+  /* phones fire resize when the address bar shows/hides while scrolling: only react to real width changes */
+  function onWidth(fn){ let w=innerWidth, tm; addEventListener('resize',()=>{ clearTimeout(tm); tm=setTimeout(()=>{ if(innerWidth!==w){ w=innerWidth; fn(); } },150); }); }
   /* ledger field: drifting figures that gather into the A */
   const fc = document.getElementById('field'), fx = fc.getContext('2d');
   let FW, FH, FD, pts = [], gather = 0;
@@ -465,9 +467,10 @@ body.menu-open nav{opacity:1}
       if(p.x<-20)p.x=FW+20; if(p.x>FW+20)p.x=-20; if(p.y<-20)p.y=FH+20; if(p.y>FH+20)p.y=-20;
       const x=p.x+(p.tx-p.x)*g, y=p.y+(p.ty-p.y)*g;
       fx.globalAlpha=p.a*(1-g*.55); fx.fillStyle=p.m?'#3EE6B4':'#61C0E9'; fx.font=p.s+'px "JetBrains Mono", monospace'; fx.fillText(p.g,x,y); }
-    fx.globalAlpha=1; requestAnimationFrame(drawField);
+    fx.globalAlpha=1; if(fieldOn) requestAnimationFrame(drawField);
   }
-  build(); drawField(); addEventListener('resize', build);
+  let fieldOn = true; new IntersectionObserver(es=>{ const v=es[0].isIntersecting; if(v && !fieldOn){ fieldOn=true; requestAnimationFrame(drawField); } else if(!v) fieldOn=false; }).observe(document.getElementById('intro'));
+  build(); drawField(); onWidth(build);
 
   const cline=document.getElementById('chartLine'), cdot=document.getElementById('chartDot'), CL=cline.getTotalLength();
   cline.style.strokeDasharray=CL; cline.style.strokeDashoffset=CL;
@@ -485,7 +488,7 @@ body.menu-open nav{opacity:1}
   /* soft moving glow behind the opening */
   const cv = document.getElementById('bg'), x = cv.getContext('2d'); let W,H,D;
   function size(){ D=Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*D; cv.height=H*D; x.setTransform(D,0,0,D,0,0); }
-  size(); addEventListener('resize', size);
+  size(); onWidth(size);
   const blobs=[{c:'30,111,217',r:.55,s:.00011,o:0},{c:'62,230,180',r:.38,s:.00016,o:2},{c:'97,192,233',r:.3,s:.00009,o:4}];
   function paint(t){ x.clearRect(0,0,W,H);
     for(const b of blobs){ const px=W*(.55+.3*Math.cos(t*b.s+b.o)), py=H*(.45+.3*Math.sin(t*b.s*1.3+b.o)), R=Math.max(W,H)*b.r;
@@ -493,7 +496,8 @@ body.menu-open nav{opacity:1}
     x.strokeStyle='rgba(97,192,233,.06)'; x.lineWidth=1; const step=48;
     for(let gx=0;gx<W;gx+=step){x.beginPath();x.moveTo(gx,0);x.lineTo(gx,H);x.stroke();}
     for(let gy=0;gy<H;gy+=step){x.beginPath();x.moveTo(0,gy);x.lineTo(W,gy);x.stroke();}
-    if(!reduce) requestAnimationFrame(paint); }
+    if(!reduce && bgOn) requestAnimationFrame(paint); }
+  let bgOn = true; new IntersectionObserver(es=>{ const v=es[0].isIntersecting; if(v && !bgOn){ bgOn=true; requestAnimationFrame(paint); } else if(!v) bgOn=false; }).observe(cv);
   requestAnimationFrame(paint);
 
   /* where we work map: flight lines from Beirut, drawn once */
@@ -561,7 +565,7 @@ body.menu-open nav{opacity:1}
     const cxT = w.left + 2.195*k + size/2, cyT = w.top + 5.756*k + size/2;
     return {x: cxT - (a.left + a.width/2), y: cyT - (a.top + a.height/2), s: size / a.width};
   }
-  let F = flip(); addEventListener('resize', () => { F = flip(); });
+  let F = flip(); onWidth(() => { F = flip(); });
   const G = {g:0};
   /* smooth, weighted scrolling on computers (touch screens keep their own native scroll) */
   let lenis = null;
@@ -572,15 +576,14 @@ body.menu-open nav{opacity:1}
   addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (!lenis) closeMenu(); }));
   if (typeof Lenis !== 'undefined'){
-    /* phones get the same weighted, gliding scroll as computers (Ghady, 19 Nov 2026) */
-    lenis = new Lenis(phone ? {lerp:.075, syncTouch:true, syncTouchLerp:.075, touchInertiaMultiplier:28} : {lerp:.075, wheelMultiplier:.9});
+    lenis = new Lenis({lerp:.075, wheelMultiplier:.9});   /* phones: native touch momentum (smoother on iOS/Android, no jitter at the top) */
     lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
     document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const t=document.querySelector(a.getAttribute('href')); if(!t) return; e.preventDefault(); closeMenu(); lenis.scrollTo(t,{offset:-60, duration:1.4}); }));
   }
   /* phones and tablets: the same scroll-driven opening as on computers (Ghady, 18 Nov 2026: "exactly the same, same smoothness");
      touch scrolling is normalised so the pinned opening stays steady while the address bar moves */
   if (phone){ ScrollTrigger.config({ignoreMobileResize:true}); if (!lenis) ScrollTrigger.normalizeScroll(true); }
-  const intro = gsap.timeline({defaults:{ease:'sine.inOut'}, scrollTrigger:{trigger:'#intro', start:'top top', end:'+=280%', scrub: 1.4, pin:true, anticipatePin:1, invalidateOnRefresh:true, onRefresh(){ F = flip(); }}})
+  const intro = gsap.timeline({defaults:{ease:'sine.inOut'}, scrollTrigger:{trigger:'#intro', start:'top top', end:'+=280%', scrub: phone ? 1 : 1.4, pin:true, anticipatePin: phone ? 0 : 1, invalidateOnRefresh:true, onRefresh(){ F = flip(); }}})
     .to('#m1Title, #m1Sub, .intro-cue', {opacity:0, y:-50, duration:.5, ease:'power1.in'}, 0)
     .to(mark, {scale:() => Math.min(2.6, innerWidth*.86/mark.getBoundingClientRect().width), y:() => innerHeight*.06, duration:1.05, ease:'sine.inOut'}, 0)
     .to(G, {g:1, duration:.85, ease:'sine.inOut', onUpdate(){ gather = G.g; }}, .1)
