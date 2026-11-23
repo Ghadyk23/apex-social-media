@@ -71,7 +71,9 @@ nav ul a{text-decoration:none} nav ul a:hover{color:var(--paper)}
 .kpi{background:rgba(6,24,43,.6);border:1px solid var(--line);border-radius:14px;padding:12px}
 .kpi span{display:block;font-size:11px;color:var(--muted)}
 .kpi b{font-family:var(--display);font-size:clamp(17px,1.9vw,22px);font-variant-numeric:tabular-nums}
-.spark{width:100%;height:90px;display:block}
+.stages{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin:6px 0 4px;padding-top:6px}
+.stages .trk{position:absolute;left:10%;right:10%;top:13px;height:2px;background:var(--line);border-radius:2px}.stages .trk i{position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,#61C0E9,#3EE6B4);border-radius:2px;transform-origin:left}
+.stg{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}.stg b{width:16px;height:16px;border-radius:50%;background:var(--ink);border:2px solid #3EE6B4;box-shadow:0 0 0 4px rgba(62,230,180,.12)}.stg span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
 .checks{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px}
 .checks li{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:10px;background:rgba(6,24,43,.55)}
 .checks li em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -328,19 +330,16 @@ body.menu-open nav{opacity:1}
       <div class="cta rv"><a class="btn solid" href="#contact">Contact us</a><a class="btn" href="#services">Our services</a></div>
       <div class="trust rv"><span><b>Partner-led</b> on every file</span><span><b>Automated checks</b> every month</span><span><b>One roof</b> for accounting, tax and audit</span></div>
     </div>
-    <div class="report" id="report" aria-label="Sample monthly report, illustrative">
-      <div class="rp-top"><span>Monthly report · October · USD</span><span class="live"><i></i>Closing</span></div>
+    <div class="report" id="report" aria-label="How a month with APEX runs">
+      <div class="rp-top"><span>Your month with APEX</span><span class="live"><i></i>In progress</span></div>
       <div class="kpis">
-        <div class="kpi"><span>Cash in bank</span><b data-money="248310">$248,310</b></div>
-        <div class="kpi"><span>Revenue</span><b data-money="182940">$182,940</b></div>
-        <div class="kpi"><span>Net profit</span><b data-money="31205">$31,205</b></div>
+        <div class="kpi"><span>Books</span><b>Current</b></div>
+        <div class="kpi"><span>Controls</span><b>Passed</b></div>
+        <div class="kpi"><span>Review</span><b>Partner</b></div>
       </div>
-      <svg class="spark" viewBox="0 0 400 90" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3EE6B4" stop-opacity=".35"/><stop offset="1" stop-color="#3EE6B4" stop-opacity="0"/></linearGradient></defs>
-        <path id="sparkFill" d="M0 70 L40 62 L80 66 L120 52 L160 56 L200 40 L240 44 L280 30 L320 34 L360 20 L400 14 L400 90 L0 90 Z" fill="url(#sg)"/>
-        <path id="sparkLine" d="M0 70 L40 62 L80 66 L120 52 L160 56 L200 40 L240 44 L280 30 L320 34 L360 20 L400 14" fill="none" stroke="#3EE6B4" stroke-width="2.5" stroke-linejoin="round"/>
-        <circle cx="400" cy="14" r="4" fill="#3EE6B4"/>
-      </svg>
+      <div class="stages" aria-hidden="true"><div class="trk"><i id="stageBar"></i></div>
+        <div class="stg"><b></b><span>Collect</span></div><div class="stg"><b></b><span>Book</span></div><div class="stg"><b></b><span>Check</span></div><div class="stg"><b></b><span>Review</span></div><div class="stg"><b></b><span>Deliver</span></div>
+      </div>
       <ul class="checks" id="checks">
         <li><span>Bank reconciliation</span><em>done</em></li>
         <li><span>VAT 11% control</span><em>passed</em></li>
@@ -348,7 +347,7 @@ body.menu-open nav{opacity:1}
         <li><span>Salaries tax</span><em>filed</em></li>
         <li><span>Monthly P&amp;L</span><em>in review</em></li>
       </ul>
-      <div class="rp-note">Sample company, illustrative figures</div>
+      <div class="rp-note">How every month runs, for every client</div>
     </div>
   </div>
 </header>
@@ -386,21 +385,21 @@ body.menu-open nav{opacity:1}
   <div class="eyebrow rv">Services</div>
   <h2 class="sec-title rv">Five practices. One team.</h2>
   <div class="svc">
-    <article class="tile"><span class="no">01</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><h3>Audit and assurance</h3><ul><li>Statutory and internal audits</li><li>IFRS financial statements</li><li>Board reports for SAL companies</li><li>Due diligence</li></ul></article>
-    <article class="tile"><span class="no">02</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Accounting and reporting</h3><ul><li>Bookkeeping in your ERP or ours</li><li>Monthly P&amp;L and management reports</li><li>ERP imports for CTS, Omega, SAGE</li></ul></article>
-    <article class="tile"><span class="no">03</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>Tax and NSSF</h3><ul><li>Corporate and individual tax</li><li>VAT returns with the 11% control</li><li>Salaries tax and NSSF declarations</li></ul></article>
-    <article class="tile"><span class="no">04</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div><h3>Financial advisory</h3><ul><li>Feasibility studies</li><li>Capital budgeting and financing</li><li>Valuation, M&amp;A and restructuring</li></ul></article>
-    <article class="tile"><span class="no">05</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Technology risk advisory</h3><ul><li>IT audits and ERP selection</li><li>IT governance and business continuity</li><li>Data analytics</li></ul></article>
+    <article class="tile"><span class="no">01</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><h3>Audit and assurance</h3><ul><li>Statutory and external audits</li><li>Internal audit and controls review</li><li>IFRS financial statements</li><li>Board reports for SAL companies</li><li>Agreed-upon procedures</li><li>Due diligence</li></ul></article>
+    <article class="tile"><span class="no">02</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Accounting and reporting</h3><ul><li>Bookkeeping in your ERP or ours</li><li>Monthly P&amp;L and management reports</li><li>Bank and account reconciliations</li><li>Payroll processing</li><li>Cash-flow and VAT controls</li><li>ERP imports for CTS, Omega, SAGE</li></ul></article>
+    <article class="tile"><span class="no">03</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>Tax and NSSF consultancy</h3><ul><li>Tax planning and advisory</li><li>Corporate and individual tax returns</li><li>VAT returns with the 11% control</li><li>Salaries tax and NSSF declarations</li><li>NSSF clearances and end-of-service</li><li>Support in tax and NSSF inspections</li></ul></article>
+    <article class="tile"><span class="no">04</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div><h3>Financial services</h3><ul><li>Feasibility studies</li><li>Business plans and financial models</li><li>Budgets and cash-flow forecasts</li><li>Business valuation</li><li>Capital budgeting and financing</li><li>M&amp;A, due diligence and restructuring</li></ul></article>
+    <article class="tile"><span class="no">05</span><span class="bar"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#61C0E9" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>IT audit and technology risk</h3><ul><li>IT general controls audit</li><li>ERP selection and implementation review</li><li>Access rights and cybersecurity review</li><li>IT governance and business continuity</li><li>Data analytics and process automation</li></ul></article>
   </div>
 </div></section>
 
 <section id="how" class="gut"><div class="wrap">
   <div class="eyebrow rv">How it works</div>
-  <h2 class="sec-title rv">A fixed quote, then a monthly rhythm.</h2>
+  <h2 class="sec-title rv">A clear plan, then a monthly rhythm.</h2>
   <div class="steps" id="steps">
     <div class="rail"><i></i></div>
     <div class="st"><div class="dot">1</div><h3>Get in touch</h3><p>Tell us about your company, its books and its deadlines.</p></div>
-    <div class="st"><div class="dot">2</div><h3>Fixed quote</h3><p>One monthly fee in writing, based on entries and entities.</p></div>
+    <div class="st"><div class="dot">2</div><h3>Tailored proposal</h3><p>A written proposal with the scope, the team and the timeline for your company.</p></div>
     <div class="st"><div class="dot">3</div><h3>Onboarding</h3><p>Send documents by email, a shared folder or your ERP exports.</p></div>
     <div class="st"><div class="dot">4</div><h3>Monthly rhythm</h3><p>Booked, checked, reviewed by an accountant, delivered on time.</p></div>
   </div>
@@ -419,7 +418,7 @@ body.menu-open nav{opacity:1}
 </div></section>
 
 <section id="contact" class="gut"><div class="wrap"><div class="box rv">
-  <div><div class="eyebrow">Beyond Numbers</div><h2 style="margin-top:14px">Let's look at your numbers.</h2><p>Tell us about your company and we will send a written, fixed quote.</p><div class="cta"><a class="btn solid" href="mailto:info@apexfinancegroup.io">Email us</a><a class="btn" href="#services">Our services</a></div></div>
+  <div><div class="eyebrow">Beyond Numbers</div><h2 style="margin-top:14px">Let's look at your numbers.</h2><p>Tell us about your company and we will send you a tailored proposal.</p><div class="cta"><a class="btn solid" href="mailto:info@apexfinancegroup.io">Email us</a><a class="btn" href="#services">Our services</a></div></div>
   <div class="cdet"><a href="mailto:info@apexfinancegroup.io">info@apexfinancegroup.io</a><a href="tel:+9611202132">+961 1 202 132</a><span>Karam Building, Sioufi, Achrafieh, Beirut</span></div>
 </div></div></section>
 
@@ -598,12 +597,9 @@ body.menu-open nav{opacity:1}
   const tl = gsap.timeline({paused:true}); whenSeen(document.getElementById('hero'), ()=>tl.play(), .2);
   tl.from('#hero .rv', {y:28, opacity:0, duration:.8, stagger:.09, ease:'power3.out'})
     .from('#report', {y:50, opacity:0, duration:1, ease:'expo.out'}, .2);
-  const line = document.getElementById('sparkLine'), L = line.getTotalLength();
-  gsap.set(line, {strokeDasharray:L, strokeDashoffset:L});
-  tl.to(line, {strokeDashoffset:0, duration:1.4, ease:'power2.inOut'}, .7)
-    .from('#sparkFill', {opacity:0, duration:.8}, 1.4);
-  document.querySelectorAll('[data-money]').forEach(el => { const v=+el.dataset.money, o={v:0};
-    tl.to(o, {v, duration:1.4, ease:'power2.out', onUpdate(){ el.textContent='$'+Math.round(o.v).toLocaleString('en-US'); }}, .7); });
+  tl.from('#stageBar', {scaleX:0, duration:1.6, ease:'power2.inOut'}, .7)
+    .from('.stg b', {scale:0, duration:.4, stagger:.32, ease:'back.out(2.5)'}, .7)
+    .from('.kpi', {y:12, opacity:0, duration:.5, stagger:.12}, .6);
   gsap.utils.toArray('#checks li').forEach((li,i) => tl.from(li, {x:20, opacity:0, duration:.4, onComplete(){ if(i<2||i===3) li.classList.add('done'); }}, 1 + i*.18));
 
   /* services: the cards fan in one after another, icons draw themselves, points follow; pointer spotlight + gentle tilt */
